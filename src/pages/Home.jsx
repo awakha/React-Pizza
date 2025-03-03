@@ -5,8 +5,10 @@ import Sort from "../components/Sort.jsx";
 import PizzaBlock from "../components/PizzaBlock/index.jsx";
 import Skeleton from "../components/PizzaBlock/Skeleton.jsx";
 import Pagination from "../components/Pagination/index.jsx";
+import { SearchContext } from "../App.js";
 
-export const Home = ({ searchValue }) => {
+export const Home = () => {
+  const { searchValue } = React.useContext(SearchContext);
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [categoryId, setCategoryId] = React.useState(0);
@@ -29,7 +31,6 @@ export const Home = ({ searchValue }) => {
     )
       .then((res) => res.json())
       .then((arr) => {
-        console.log("API Response:", arr); // Проверяем, что возвращает сервер
         setItems(Array.isArray(arr) ? arr : []); // Если не массив → делаем []
         setIsLoading(false);
       })
